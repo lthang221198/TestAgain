@@ -1,0 +1,39 @@
+package JDBC;
+
+import java.sql.*;
+
+public class TestJDBC {
+	TestJDBC connection = null;
+	
+	String driverName = "com.mysql.cj.jdbc.Driver";
+	
+	String severName="localhost";
+	String portNumber = "3306";
+	
+	String url = "jdbc.mysql://localhost: 3306/testdb";
+	
+	String username = "root";
+	String password = "204658";
+	
+	public TestConnector() {}
+	
+	public boolean doConnection() {
+		try {
+			Class.forName(driverName);
+			
+			connection = DriverManager.getConnection(url,username,password);
+		} catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFoundException: "+e.getMessage());
+			return false;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	public static void main(String[] args) {
+		TestConnector con = new TestConnector();
+		System.out.println("Connection: "+ con.doConnection());
+	}
+
+}
